@@ -1,0 +1,47 @@
+# SENTINEL: Agentic Emergency Response System
+
+SENTINEL is a next-generation AI-driven Mission Control system designed to automate and optimize emergency response for traffic accidents. It transforms raw sensor data (video/GPS) into actionable tactical intelligence through a multi-agent pipeline.
+
+## 核心 (Core Idea)
+The system operates as an "Agentic Pipeline," where specialized AI agents collaborate in a sequence to handle different phases of emergency management: Detection → Triage → Resource Intelligence → Dispatch Allocation.
+
+## 1. The Multi-Agent Workflow
+- **Detection Agent (Vision Engine):**
+  - Uses YOLOv8 to scan live or uploaded video feeds.
+  - Identifies vehicles and detects high-probability collision manifolds.
+  - Generates instant accident snapshots for clinical review.
+- **Triage Agent (Clinical Assessment):**
+  - Uses Google Gemini 2.5 Flash to analyze incident metadata (vehicles involved, collision probability, sector coordinates).
+  - Calculates a "Trauma Score" (1-10) and provides clinical reasoning for the mechanism of injury.
+- **Resource Agent (Strategic Scouting):**
+  - Scouts real-world emergency infrastructure via OpenStreetMap (Overpass API).
+  - Calculates real-time road trajectories and ETAs using OSRM (Open Source Routing Machine).
+  - Uses Gemini Strategic Reasoning to rank facilities based on capability and proximity.
+- **Allocation Agent (Unified Dispatch):**
+  - Locks mission profiles and synchronizes multi-agency orders (EMS, Police, Fire).
+  - Finalizes the unified mission plan and "locks" the decision matrix.
+
+## 2. Technology Stack & Tools
+- **Backend Infrastructure:**
+  - **FastAPI:** High-performance Python web framework for the core API and WebSocket management.
+  - **Uvicorn:** ASGI server for handling asynchronous communication.
+  - **WebSockets:** Used for real-time streaming of agent execution logs and telemetry data to the HUD.
+  - **MongoDB:** Used for persisting incident data and historical analytics.
+- **Artificial Intelligence:**
+  - **Google Gemini 2.5 Flash:** Provides strategic reasoning, triage assessments, and multi-agency coordination logic.
+  - **Ultralytics YOLOv8:** Real-time object detection and crash confirmation engine.
+- **Mapping & GIS:**
+  - **Leaflet & React-Leaflet:** Interactive tactical map interface.
+  - **Overpass API:** Dynamic scouting of nearby Hospitals, Police Stations, and Fire Stations from OSM data.
+  - **OSRM (Open Source Routing Machine):** Real-road distance and ETA calculations.
+- **Frontend HUD:**
+  - **Vite + React:** Modern frontend framework for a highly responsive, low-latency interface.
+  - **TailwindCSS:** Custom tactical styling using high-contrast, clinical aesthetics.
+  - **JetBrains Mono:** Specialized typography for high readability of technical logs.
+
+## 3. Key UI Features
+- **Live Camera Feed:** Real-time visualization of the vision engine's detection boxes.
+- **Frame-By-Frame Analysis Log:** A vertical stream of system and agent alerts.
+- **Trauma Scorecard:** Instant severity assessment and mechanism of injury display.
+- **Tactical Map:** Dynamic markers for incident site and dispatched resources with optimized route geometry.
+- **Mission Pulse Bar:** Bottom status bar showing overall system health, active module, and mission clock.

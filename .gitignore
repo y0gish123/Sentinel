@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+
+# YOLO model (large binary - friend downloads their own)
+backend/yolov8n.pt
+
+# Videos (large files - friend provides their own)
+demo_videos/
+backend/uploads/
+
+# Node.js
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Debug artifacts
+*.log
+debug_output.txt
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #F1F5F9;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.8);
+  --glass-blur: blur(12px) saturate(180%);
+  --glass-shadow: 0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,1);
+
+  --color-detection: #3B82F6;
+  --color-triage: #F59E0B;
+  --color-resource: #8B5CF6;
+  --color-allocation: #EF4444;
+  --color-success: #10B981;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-base);
+  color: #1E293B;
+  overflow: hidden;
+}
+
+/* ── BACKGROUND ORBS ────────────────────────────────────────── */
+
+.background-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: orbPulse 8s infinite ease-in-out;
+  opacity: 0.12;
+}
+
+.orb-detection {
+  top: -10%; left: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--color-detection) 0%, transparent 70%);
+}
+
+.orb-triage {
+  top: 20%; left: 30%;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, var(--color-triage) 0%, transparent 70%);
+  animation-delay: -2s;
+}
+
+.orb-resource {
+  top: 10%; right: -5%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, var(--color-resource) 0%, transparent 70%);
+  animation-delay: -4s;
+}
+
+.orb-allocation {
+  bottom: -10%; left: 20%;
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, var(--color-allocation) 0%, transparent 70%);
+  animation-delay: -6s;
+}
+
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.12; }
+  50% { transform: scale(1.15) translate(2%, 2%); opacity: 0.18; }
+}
+
+/* ── GLASSMORPHISM UTILITIES ────────────────────────────────── */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,1);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────── */
+
+@keyframes pulseRing {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 3s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes scanline {
+  0% { top: 0%; opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to bottom, transparent, rgba(34, 197, 94, 0.4), transparent);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── SCROLLBARS ─────────────────────────────────────────────── */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ── LEAFLET CUSTOMIZATION ──────────────────────────────────── */
+
+.leaflet-container {
+  border-radius: 20px !important;
+  background: #F8FAFC !important;
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+  margin: 20px !important;
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  background: white !important;
+  color: #64748B !important;
+  border: 1px solid #F1F5F9 !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 0.2s ease !important;
+}
+
+.leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+  background: #F8FAFC !important;
+  color: #1E293B !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.leaflet-marker-label {
+  background: white !important;
+  border: 1px solid #F1F5F9 !important;
+  color: #1E293B !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
